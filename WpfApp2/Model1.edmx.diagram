@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="985d5597662f4ecc954f3d6c9023f508" Name="Diagram1">
+        <EntityTypeShape EntityType="HOTELSModel.Gender" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Виды_обслуживания" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Дополнительное_обслуживание" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Категория_номера" Width="1.5" PointX="3.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Клиенты" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Номера" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Сводная_таблица" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="HOTELSModel.FK_Клиенты_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="HOTELSModel.FK_Дополнительное_обслуживание_Виды_обслуживания" ManuallyRouted="false" />
+        <AssociationConnector Association="HOTELSModel.FK_Дополнительное_обслуживание_Клиенты" ManuallyRouted="false" />
+        <AssociationConnector Association="HOTELSModel.FK_Номера_Категория_номера" ManuallyRouted="false" />
+        <AssociationConnector Association="HOTELSModel.FK_Сводная_таблица_Клиенты" ManuallyRouted="false" />
+        <AssociationConnector Association="HOTELSModel.FK_Сводная_таблица_Номера" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
