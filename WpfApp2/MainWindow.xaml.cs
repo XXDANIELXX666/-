@@ -20,11 +20,11 @@ namespace WpfApp2
     /// </summary>
     public partial class MainWindow : Window
     {
-        HOTELSEntities context;
+        HOTELSEntities4 context;
         public MainWindow()
         {
             InitializeComponent();
-            context = new HOTELSEntities();
+            context = new HOTELSEntities4();
             ShowTable();
         }
 
@@ -35,17 +35,36 @@ namespace WpfApp2
 
         private void AddData_Click(object sender, RoutedEventArgs e)
         {
-
+            var NewClientService = new Сводная_таблица();
+            context.Сводная_таблица.Add(NewClientService);
+            var BtnAddData = new AddDataTable(context, NewClientService);
+            BtnAddData.ShowDialog();
         }
 
         private void DataDelete_Click(object sender, RoutedEventArgs e)
         {
+            var currentClientService = DataGridСводнаятаблица.SelectedItem as Сводная_таблица;
+            if (currentClientService == null)
+            {
+                MessageBox.Show("");
+                return;
 
+            }
+            MessageBoxResult messageBoxResult = MessageBox.Show("Вы действительно хотите удалить эту строку?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                context.Сводная_таблица.Remove(currentClientService);
+                context.SaveChanges();
+                ShowTable();
+            }
         }
 
         private void BtnEditData_Click(object sender, RoutedEventArgs e)
         {
-
+            Button BtnEdit = sender as Button;
+            var currentRental = BtnEdit.DataContext as Сводная_таблица;
+            var EdiWindow = new AddDataTable(context, currentRental);
+            EdiWindow.ShowDialog();
         }
     }
 }

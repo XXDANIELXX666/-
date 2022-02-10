@@ -12,21 +12,19 @@ namespace WpfApp2
     using System;
     using System.Collections.Generic;
     
-    public partial class Категория_номера
+    public partial class Tag
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Категория_номера()
+        public Tag()
         {
-            this.Номера = new HashSet<Номера>();
+            this.TagOfClient = new HashSet<TagOfClient>();
         }
     
         public int ID { get; set; }
-        public string Категория { get; set; }
-        public Nullable<int> Количество_комнат { get; set; }
-        public Nullable<int> Количество_мест { get; set; }
-        public string Стоимость { get; set; }
+        public string Title { get; set; }
+        public string Color { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Номера> Номера { get; set; }
+        public virtual ICollection<TagOfClient> TagOfClient { get; set; }
     }
 }

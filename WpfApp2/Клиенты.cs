@@ -17,6 +17,7 @@ namespace WpfApp2
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Клиенты()
         {
+            this.TagOfClient = new HashSet<TagOfClient>();
             this.Дополнительное_обслуживание = new HashSet<Дополнительное_обслуживание>();
             this.Сводная_таблица = new HashSet<Сводная_таблица>();
         }
@@ -29,6 +30,8 @@ namespace WpfApp2
         public string Gender { get; set; }
     
         public virtual Gender Gender1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TagOfClient> TagOfClient { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Дополнительное_обслуживание> Дополнительное_обслуживание { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

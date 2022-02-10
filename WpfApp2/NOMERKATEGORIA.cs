@@ -12,17 +12,14 @@ namespace WpfApp2
     using System;
     using System.Collections.Generic;
     
-    public partial class Сводная_таблица
+    public partial class NOMERKATEGORIA
     {
-        public int ID_Записи { get; set; }
-        public Nullable<int> ID_Номера { get; set; }
-        public Nullable<int> ID_Клиента { get; set; }
-        public Nullable<System.DateTime> Дата_засиления { get; set; }
-        public Nullable<System.DateTime> Дата_высиления { get; set; }
-        public string ФОТО { get; set; }
-        public string Комиентарий { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> Категория { get; set; }
+        public Nullable<int> Количество_комнат { get; set; }
+        public Nullable<int> Количество_мест { get; set; }
+        public string Стоимость { get; set; }
     
-        public virtual Клиенты Клиенты { get; set; }
         public virtual Номера Номера { get; set; }
     }
 }

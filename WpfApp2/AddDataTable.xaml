@@ -1,0 +1,34 @@
+﻿<Window x:Class="WpfApp2.AddDataTable"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="AddDataTable" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="StackLetters" Orientation="Horizontal" Background="{StaticResource ColorMain}" Margin="0,0,0,46" Grid.RowSpan="2">
+            <TextBlock FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" ></TextBlock>
+        </StackPanel>
+
+        <UniformGrid x:Name="ЫЫЫ" Columns="2" Margin="0,0,0,10">
+            <TextBlock>Номер</TextBlock>
+            <ComboBox  x:Name="Cmb" DisplayMemberPath="Категории" SelectedItem="{Binding Номера}"></ComboBox>
+            <TextBlock>Клиент</TextBlock>
+            <ComboBox  x:Name="Cmbb" DisplayMemberPath="Фамилия" SelectedItem="{Binding Клиенты}"></ComboBox>
+            <TextBlock>Дата_засиления</TextBlock>
+            <DatePicker SelectedDate="{Binding Дата_засиления}"></DatePicker>
+            <TextBlock>Дата_высиления</TextBlock>
+            <DatePicker SelectedDate="{Binding Дата_высиления}"></DatePicker>
+            <TextBlock>Изображение комнаты</TextBlock>
+            <TextBox x:Name="TxtFirst" Text="{Binding ФОТО}"></TextBox>
+            <TextBlock>Комиентарий</TextBlock>
+            <TextBox x:Name="TxtFirstName" Text="{Binding Комиентарий}"></TextBox>
+        </UniformGrid>
+        <Button x:Name="BtnSav" Grid.Row="1" Click="BtnSav_Click" Margin="0,24,0,0">Сохранить</Button>
+    </Grid>
+</Window>

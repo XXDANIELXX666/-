@@ -12,17 +12,12 @@ namespace WpfApp2
     using System;
     using System.Collections.Generic;
     
-    public partial class Сводная_таблица
+    public partial class TagOfClient
     {
-        public int ID_Записи { get; set; }
-        public Nullable<int> ID_Номера { get; set; }
-        public Nullable<int> ID_Клиента { get; set; }
-        public Nullable<System.DateTime> Дата_засиления { get; set; }
-        public Nullable<System.DateTime> Дата_высиления { get; set; }
-        public string ФОТО { get; set; }
-        public string Комиентарий { get; set; }
+        public int ClientID { get; set; }
+        public int TagID { get; set; }
     
+        public virtual Tag Tag { get; set; }
         public virtual Клиенты Клиенты { get; set; }
-        public virtual Номера Номера { get; set; }
     }
 }

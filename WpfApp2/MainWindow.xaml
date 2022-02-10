@@ -21,12 +21,12 @@
 
         <DataGrid Grid.Row="1" x:Name="DataGridСводнаятаблица" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Номер" Binding="{Binding [Категория номера].Категория}"/>
+                <DataGridTextColumn Header="Номер" Binding="{Binding Номера.Категории}"/>
                 <DataGridTextColumn Header="Клиент" Binding="{Binding Клиенты.Фамилия}"/>
                 <DataGridTextColumn Header="Дата засиления" Binding="{Binding Дата_засиления}"/>
                 <DataGridTextColumn Header="Дата высиления" Binding="{Binding Дата_высиления}"/>
-                <DataGridTextColumn Header="Изображение" Binding="{Binding [Изображение комнаты]}"/>
-                <DataGridTextColumn Header="Комментарий" Binding="{Binding [Комиентарий]}"/>
+                <DataGridTextColumn Header="Изображение" Binding="{Binding ФОТО}"/>
+                <DataGridTextColumn Header="Комментарий" Binding="{Binding Комиентарий}"/>
                 <DataGridTemplateColumn Header="Редактировать">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
