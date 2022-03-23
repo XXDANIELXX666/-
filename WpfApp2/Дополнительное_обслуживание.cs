@@ -14,13 +14,20 @@ namespace WpfApp2
     
     public partial class Дополнительное_обслуживание
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Дополнительное_обслуживание()
+        {
+            this.Сводная_таблица = new HashSet<Сводная_таблица>();
+        }
+    
         public int ID { get; set; }
-        public Nullable<int> ID_Обслуживания { get; set; }
-        public Nullable<int> ID_Клиента { get; set; }
+        public string Услуга { get; set; }
+        public Nullable<int> ID_Работника { get; set; }
         public Nullable<System.DateTime> Дата_обслуживания { get; set; }
         public string Стоимость_обслуживания { get; set; }
     
-        public virtual Виды_обслуживания Виды_обслуживания { get; set; }
-        public virtual Клиенты Клиенты { get; set; }
+        public virtual Работники Работники { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Сводная_таблица> Сводная_таблица { get; set; }
     }
 }

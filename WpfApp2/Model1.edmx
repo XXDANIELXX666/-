@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Code" />
           </Key>
-          <Property Name="Code" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="NOMERKATEGORIA">
@@ -38,20 +38,13 @@
           <Property Name="ClientID" Type="int" Nullable="false" />
           <Property Name="TagID" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Виды обслуживания">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Наименование услуги" Type="nvarchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="Дополнительное обслуживание">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="ID_Обслуживания" Type="int" />
-          <Property Name="ID_Клиента" Type="int" />
+          <Property Name="Услуга" Type="nvarchar" MaxLength="500" />
+          <Property Name="ID_Работника" Type="int" />
           <Property Name="Дата обслуживания" Type="datetime" />
           <Property Name="Стоимость обслуживания" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -59,12 +52,12 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Фамилия" Type="nvarchar" MaxLength="50" />
           <Property Name="Имя" Type="nvarchar" MaxLength="50" />
           <Property Name="Отчество" Type="nvarchar" MaxLength="50" />
           <Property Name="Дата_рождения" Type="datetime" />
-          <Property Name="Gender" Type="nchar" MaxLength="1" />
+          <Property Name="Gender" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Номера">
           <Key>
@@ -72,6 +65,17 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Категории" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Работники">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="50" />
+          <Property Name="Имя" Type="nchar" MaxLength="10" />
+          <Property Name="Отчество" Type="nchar" MaxLength="10" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="50" />
+          <Property Name="Паспорт" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Сводная таблица">
           <Key>
@@ -82,8 +86,8 @@
           <Property Name="ID_Клиента" Type="int" />
           <Property Name="Дата_засиления" Type="date" />
           <Property Name="Дата_высиления" Type="datetime" />
-          <Property Name="ФОТО" Type="nvarchar" MaxLength="50" />
-          <Property Name="Комиентарий" Type="nvarchar" MaxLength="50" />
+          <Property Name="Комиентарий" Type="nvarchar" MaxLength="500" />
+          <Property Name="Обслуживание" Type="int" />
         </EntityType>
         <Association Name="FK_NOMERKATEGORIA_Номера">
           <End Role="Номера" Type="Self.Номера" Multiplicity="0..1" />
@@ -121,32 +125,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Дополнительное обслуживание_Виды обслуживания">
-          <End Role="Виды обслуживания" Type="Self.Виды обслуживания" Multiplicity="0..1" />
+        <Association Name="FK_Дополнительное обслуживание_Работники">
+          <End Role="Работники" Type="Self.Работники" Multiplicity="0..1" />
           <End Role="Дополнительное обслуживание" Type="Self.Дополнительное обслуживание" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Виды обслуживания">
+            <Principal Role="Работники">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Дополнительное обслуживание">
-              <PropertyRef Name="ID_Обслуживания" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Дополнительное обслуживание_Клиенты">
-          <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="0..1" />
-          <End Role="Дополнительное обслуживание" Type="Self.Дополнительное обслуживание" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Клиенты">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Дополнительное обслуживание">
-              <PropertyRef Name="ID_Обслуживания" />
+              <PropertyRef Name="ID_Работника" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Клиенты_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
           <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -154,6 +146,18 @@
             </Principal>
             <Dependent Role="Клиенты">
               <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сводная таблица_Дополнительное обслуживание">
+          <End Role="Дополнительное обслуживание" Type="Self.Дополнительное обслуживание" Multiplicity="0..1" />
+          <End Role="Сводная таблица" Type="Self.Сводная таблица" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Дополнительное обслуживание">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Сводная таблица">
+              <PropertyRef Name="Обслуживание" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -186,10 +190,10 @@
           <EntitySet Name="NOMERKATEGORIA" EntityType="Self.NOMERKATEGORIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TagOfClient" EntityType="Self.TagOfClient" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Виды обслуживания" EntityType="Self.Виды обслуживания" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Дополнительное обслуживание" EntityType="Self.Дополнительное обслуживание" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Номера" EntityType="Self.Номера" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Работники" EntityType="Self.Работники" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Сводная таблица" EntityType="Self.Сводная таблица" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_NOMERKATEGORIA_Номера" Association="Self.FK_NOMERKATEGORIA_Номера">
             <End Role="Номера" EntitySet="Номера" />
@@ -203,17 +207,17 @@
             <End Role="Клиенты" EntitySet="Клиенты" />
             <End Role="TagOfClient" EntitySet="TagOfClient" />
           </AssociationSet>
-          <AssociationSet Name="FK_Дополнительное обслуживание_Виды обслуживания" Association="Self.FK_Дополнительное обслуживание_Виды обслуживания">
-            <End Role="Виды обслуживания" EntitySet="Виды обслуживания" />
-            <End Role="Дополнительное обслуживание" EntitySet="Дополнительное обслуживание" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Дополнительное обслуживание_Клиенты" Association="Self.FK_Дополнительное обслуживание_Клиенты">
-            <End Role="Клиенты" EntitySet="Клиенты" />
+          <AssociationSet Name="FK_Дополнительное обслуживание_Работники" Association="Self.FK_Дополнительное обслуживание_Работники">
+            <End Role="Работники" EntitySet="Работники" />
             <End Role="Дополнительное обслуживание" EntitySet="Дополнительное обслуживание" />
           </AssociationSet>
           <AssociationSet Name="FK_Клиенты_Gender" Association="Self.FK_Клиенты_Gender">
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Клиенты" EntitySet="Клиенты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сводная таблица_Дополнительное обслуживание" Association="Self.FK_Сводная таблица_Дополнительное обслуживание">
+            <End Role="Дополнительное обслуживание" EntitySet="Дополнительное обслуживание" />
+            <End Role="Сводная таблица" EntitySet="Сводная таблица" />
           </AssociationSet>
           <AssociationSet Name="FK_Сводная таблица_Клиенты1" Association="Self.FK_Сводная таблица_Клиенты1">
             <End Role="Клиенты" EntitySet="Клиенты" />
@@ -233,7 +237,7 @@
           <Key>
             <PropertyRef Name="Code" />
           </Key>
-          <Property Name="Code" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Клиенты" Relationship="Self.FK_Клиенты_Gender" FromRole="Gender" ToRole="Клиенты" />
         </EntityType>
@@ -267,39 +271,30 @@
           <NavigationProperty Name="Tag" Relationship="Self.FK_TagOfClient_Tag" FromRole="TagOfClient" ToRole="Tag" />
           <NavigationProperty Name="Клиенты" Relationship="Self.FK_TagOfClient_Клиенты" FromRole="TagOfClient" ToRole="Клиенты" />
         </EntityType>
-        <EntityType Name="Виды_обслуживания">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Наименование_услуги" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Дополнительное_обслуживание" Relationship="Self.FK_Дополнительное_обслуживание_Виды_обслуживания" FromRole="Виды_обслуживания" ToRole="Дополнительное_обслуживание" />
-        </EntityType>
         <EntityType Name="Дополнительное_обслуживание">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="ID_Обслуживания" Type="Int32" />
-          <Property Name="ID_Клиента" Type="Int32" />
+          <Property Name="Услуга" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Работника" Type="Int32" />
           <Property Name="Дата_обслуживания" Type="DateTime" Precision="3" />
           <Property Name="Стоимость_обслуживания" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Виды_обслуживания" Relationship="Self.FK_Дополнительное_обслуживание_Виды_обслуживания" FromRole="Дополнительное_обслуживание" ToRole="Виды_обслуживания" />
-          <NavigationProperty Name="Клиенты" Relationship="Self.FK_Дополнительное_обслуживание_Клиенты" FromRole="Дополнительное_обслуживание" ToRole="Клиенты" />
+          <NavigationProperty Name="Работники" Relationship="Self.FK_Дополнительное_обслуживание_Работники" FromRole="Дополнительное_обслуживание" ToRole="Работники" />
+          <NavigationProperty Name="Сводная_таблица" Relationship="Self.FK_Сводная_таблица_Дополнительное_обслуживание" FromRole="Дополнительное_обслуживание" ToRole="Сводная_таблица" />
         </EntityType>
         <EntityType Name="Клиенты">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Дата_рождения" Type="DateTime" Precision="3" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Gender1" Relationship="Self.FK_Клиенты_Gender" FromRole="Клиенты" ToRole="Gender" />
           <NavigationProperty Name="TagOfClient" Relationship="Self.FK_TagOfClient_Клиенты" FromRole="Клиенты" ToRole="TagOfClient" />
-          <NavigationProperty Name="Дополнительное_обслуживание" Relationship="Self.FK_Дополнительное_обслуживание_Клиенты" FromRole="Клиенты" ToRole="Дополнительное_обслуживание" />
           <NavigationProperty Name="Сводная_таблица" Relationship="Self.FK_Сводная_таблица_Клиенты1" FromRole="Клиенты" ToRole="Сводная_таблица" />
         </EntityType>
         <EntityType Name="Номера">
@@ -311,6 +306,18 @@
           <NavigationProperty Name="NOMERKATEGORIA" Relationship="Self.FK_NOMERKATEGORIA_Номера" FromRole="Номера" ToRole="NOMERKATEGORIA" />
           <NavigationProperty Name="Сводная_таблица" Relationship="Self.FK_Сводная_таблица_Номера" FromRole="Номера" ToRole="Сводная_таблица" />
         </EntityType>
+        <EntityType Name="Работники">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Телефон" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Паспорт" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Дополнительное_обслуживание" Relationship="Self.FK_Дополнительное_обслуживание_Работники" FromRole="Работники" ToRole="Дополнительное_обслуживание" />
+        </EntityType>
         <EntityType Name="Сводная_таблица">
           <Key>
             <PropertyRef Name="ID_Записи" />
@@ -320,13 +327,14 @@
           <Property Name="ID_Клиента" Type="Int32" />
           <Property Name="Дата_засиления" Type="DateTime" Precision="0" />
           <Property Name="Дата_высиления" Type="DateTime" Precision="3" />
-          <Property Name="ФОТО" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Комиентарий" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Комиентарий" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Обслуживание" Type="Int32" />
+          <NavigationProperty Name="Дополнительное_обслуживание" Relationship="Self.FK_Сводная_таблица_Дополнительное_обслуживание" FromRole="Сводная_таблица" ToRole="Дополнительное_обслуживание" />
           <NavigationProperty Name="Клиенты" Relationship="Self.FK_Сводная_таблица_Клиенты1" FromRole="Сводная_таблица" ToRole="Клиенты" />
           <NavigationProperty Name="Номера" Relationship="Self.FK_Сводная_таблица_Номера" FromRole="Сводная_таблица" ToRole="Номера" />
         </EntityType>
         <Association Name="FK_Клиенты_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
           <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -373,27 +381,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Дополнительное_обслуживание_Виды_обслуживания">
-          <End Role="Виды_обслуживания" Type="Self.Виды_обслуживания" Multiplicity="0..1" />
+        <Association Name="FK_Дополнительное_обслуживание_Работники">
+          <End Role="Работники" Type="Self.Работники" Multiplicity="0..1" />
           <End Role="Дополнительное_обслуживание" Type="Self.Дополнительное_обслуживание" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Виды_обслуживания">
+            <Principal Role="Работники">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Дополнительное_обслуживание">
-              <PropertyRef Name="ID_Обслуживания" />
+              <PropertyRef Name="ID_Работника" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Дополнительное_обслуживание_Клиенты">
-          <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="0..1" />
-          <End Role="Дополнительное_обслуживание" Type="Self.Дополнительное_обслуживание" Multiplicity="*" />
+        <Association Name="FK_Сводная_таблица_Дополнительное_обслуживание">
+          <End Role="Дополнительное_обслуживание" Type="Self.Дополнительное_обслуживание" Multiplicity="0..1" />
+          <End Role="Сводная_таблица" Type="Self.Сводная_таблица" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Клиенты">
+            <Principal Role="Дополнительное_обслуживание">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Дополнительное_обслуживание">
-              <PropertyRef Name="ID_Обслуживания" />
+            <Dependent Role="Сводная_таблица">
+              <PropertyRef Name="Обслуживание" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -421,15 +429,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HOTELSEntities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="HOTELSEntities10" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Gender" EntityType="Self.Gender" />
           <EntitySet Name="NOMERKATEGORIA" EntityType="Self.NOMERKATEGORIA" />
           <EntitySet Name="Tag" EntityType="Self.Tag" />
           <EntitySet Name="TagOfClient" EntityType="Self.TagOfClient" />
-          <EntitySet Name="Виды_обслуживания" EntityType="Self.Виды_обслуживания" />
           <EntitySet Name="Дополнительное_обслуживание" EntityType="Self.Дополнительное_обслуживание" />
           <EntitySet Name="Клиенты" EntityType="Self.Клиенты" />
           <EntitySet Name="Номера" EntityType="Self.Номера" />
+          <EntitySet Name="Работники" EntityType="Self.Работники" />
           <EntitySet Name="Сводная_таблица" EntityType="Self.Сводная_таблица" />
           <AssociationSet Name="FK_Клиенты_Gender" Association="Self.FK_Клиенты_Gender">
             <End Role="Gender" EntitySet="Gender" />
@@ -447,13 +455,13 @@
             <End Role="Клиенты" EntitySet="Клиенты" />
             <End Role="TagOfClient" EntitySet="TagOfClient" />
           </AssociationSet>
-          <AssociationSet Name="FK_Дополнительное_обслуживание_Виды_обслуживания" Association="Self.FK_Дополнительное_обслуживание_Виды_обслуживания">
-            <End Role="Виды_обслуживания" EntitySet="Виды_обслуживания" />
+          <AssociationSet Name="FK_Дополнительное_обслуживание_Работники" Association="Self.FK_Дополнительное_обслуживание_Работники">
+            <End Role="Работники" EntitySet="Работники" />
             <End Role="Дополнительное_обслуживание" EntitySet="Дополнительное_обслуживание" />
           </AssociationSet>
-          <AssociationSet Name="FK_Дополнительное_обслуживание_Клиенты" Association="Self.FK_Дополнительное_обслуживание_Клиенты">
-            <End Role="Клиенты" EntitySet="Клиенты" />
+          <AssociationSet Name="FK_Сводная_таблица_Дополнительное_обслуживание" Association="Self.FK_Сводная_таблица_Дополнительное_обслуживание">
             <End Role="Дополнительное_обслуживание" EntitySet="Дополнительное_обслуживание" />
+            <End Role="Сводная_таблица" EntitySet="Сводная_таблица" />
           </AssociationSet>
           <AssociationSet Name="FK_Сводная_таблица_Клиенты1" Association="Self.FK_Сводная_таблица_Клиенты1">
             <End Role="Клиенты" EntitySet="Клиенты" />
@@ -469,7 +477,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище HOTELSModelContainer" CdmEntityContainer="HOTELSEntities4">
+        <EntityContainerMapping StorageEntityContainer="Хранилище HOTELSModelContainer" CdmEntityContainer="HOTELSEntities10">
           <EntitySetMapping Name="Gender">
             <EntityTypeMapping TypeName="HOTELSModel.Gender">
               <MappingFragment StoreEntitySet="Gender">
@@ -506,20 +514,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Виды_обслуживания">
-            <EntityTypeMapping TypeName="HOTELSModel.Виды_обслуживания">
-              <MappingFragment StoreEntitySet="Виды обслуживания">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Наименование_услуги" ColumnName="Наименование услуги" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Дополнительное_обслуживание">
             <EntityTypeMapping TypeName="HOTELSModel.Дополнительное_обслуживание">
               <MappingFragment StoreEntitySet="Дополнительное обслуживание">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ID_Обслуживания" ColumnName="ID_Обслуживания" />
-                <ScalarProperty Name="ID_Клиента" ColumnName="ID_Клиента" />
+                <ScalarProperty Name="Услуга" ColumnName="Услуга" />
+                <ScalarProperty Name="ID_Работника" ColumnName="ID_Работника" />
                 <ScalarProperty Name="Дата_обслуживания" ColumnName="Дата обслуживания" />
                 <ScalarProperty Name="Стоимость_обслуживания" ColumnName="Стоимость обслуживания" />
               </MappingFragment>
@@ -545,6 +545,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Работники">
+            <EntityTypeMapping TypeName="HOTELSModel.Работники">
+              <MappingFragment StoreEntitySet="Работники">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Паспорт" ColumnName="Паспорт" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Сводная_таблица">
             <EntityTypeMapping TypeName="HOTELSModel.Сводная_таблица">
               <MappingFragment StoreEntitySet="Сводная таблица">
@@ -553,8 +565,8 @@
                 <ScalarProperty Name="ID_Клиента" ColumnName="ID_Клиента" />
                 <ScalarProperty Name="Дата_засиления" ColumnName="Дата_засиления" />
                 <ScalarProperty Name="Дата_высиления" ColumnName="Дата_высиления" />
-                <ScalarProperty Name="ФОТО" ColumnName="ФОТО" />
                 <ScalarProperty Name="Комиентарий" ColumnName="Комиентарий" />
+                <ScalarProperty Name="Обслуживание" ColumnName="Обслуживание" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

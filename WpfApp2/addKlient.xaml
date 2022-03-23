@@ -1,0 +1,32 @@
+﻿<Window x:Class="WpfApp2.addKlient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        mc:Ignorable="d"
+        Title="addKlient" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="StackLetters" Orientation="Horizontal" Background="{StaticResource ColorMain}" Margin="0,0,0,46" Grid.RowSpan="2">
+            <TextBlock FontWeight="Bold" Foreground="White" HorizontalAlignment="Center" Margin="10" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" ></TextBlock>
+        </StackPanel>
+
+        <UniformGrid x:Name="ЫЫЫ" Columns="2" Margin="0,0,0,10">
+            <TextBlock>Фамилия</TextBlock>
+            <TextBox x:Name="TxtFirstNam" Text="{Binding Фамилия}"></TextBox>
+            <TextBlock>Имя</TextBlock>
+            <TextBox x:Name="TxtFirstNa" Text="{Binding Имя}"></TextBox>
+            <TextBlock>Отчество</TextBlock>
+            <TextBox x:Name="TxtFirstN" Text="{Binding Отчество}"></TextBox>
+            <TextBlock>Дата_рождения</TextBlock>
+            <DatePicker SelectedDate="{Binding Дата_рождения}"></DatePicker>
+            <TextBlock>GenderCode</TextBlock>
+            <ComboBox x:Name="Cmbb" DisplayMemberPath="Name" SelectedItem="{Binding Gender1}"></ComboBox>
+        </UniformGrid>
+        <Button x:Name="BtnSav" Grid.Row="1" Click="BtnSav_Click" Margin="0,24,0,0">Сохранить</Button>
+    </Grid>
+</Window>

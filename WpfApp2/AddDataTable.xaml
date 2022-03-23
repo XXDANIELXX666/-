@@ -24,10 +24,10 @@
             <DatePicker SelectedDate="{Binding Дата_засиления}"></DatePicker>
             <TextBlock>Дата_высиления</TextBlock>
             <DatePicker SelectedDate="{Binding Дата_высиления}"></DatePicker>
-            <TextBlock>Изображение комнаты</TextBlock>
-            <TextBox x:Name="TxtFirst" Text="{Binding ФОТО}"></TextBox>
             <TextBlock>Комиентарий</TextBlock>
             <TextBox x:Name="TxtFirstName" Text="{Binding Комиентарий}"></TextBox>
+            <TextBlock>Обслуживание</TextBlock>
+            <ComboBox  x:Name="Cmbbbbb" DisplayMemberPath="Услуга" SelectedItem="{Binding Дополнительное_обслуживание}"></ComboBox>
         </UniformGrid>
         <Button x:Name="BtnSav" Grid.Row="1" Click="BtnSav_Click" Margin="0,24,0,0">Сохранить</Button>
     </Grid>

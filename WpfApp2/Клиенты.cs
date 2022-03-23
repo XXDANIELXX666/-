@@ -18,7 +18,6 @@ namespace WpfApp2
         public Клиенты()
         {
             this.TagOfClient = new HashSet<TagOfClient>();
-            this.Дополнительное_обслуживание = new HashSet<Дополнительное_обслуживание>();
             this.Сводная_таблица = new HashSet<Сводная_таблица>();
         }
     
@@ -27,13 +26,11 @@ namespace WpfApp2
         public string Имя { get; set; }
         public string Отчество { get; set; }
         public Nullable<System.DateTime> Дата_рождения { get; set; }
-        public string Gender { get; set; }
+        public int Gender { get; set; }
     
         public virtual Gender Gender1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TagOfClient> TagOfClient { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Дополнительное_обслуживание> Дополнительное_обслуживание { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Сводная_таблица> Сводная_таблица { get; set; }
     }

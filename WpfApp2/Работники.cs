@@ -12,18 +12,22 @@ namespace WpfApp2
     using System;
     using System.Collections.Generic;
     
-    public partial class Gender
+    public partial class Работники
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Gender()
+        public Работники()
         {
-            this.Клиенты = new HashSet<Клиенты>();
+            this.Дополнительное_обслуживание = new HashSet<Дополнительное_обслуживание>();
         }
     
-        public int Code { get; set; }
-        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Фамилия { get; set; }
+        public string Имя { get; set; }
+        public string Отчество { get; set; }
+        public string Телефон { get; set; }
+        public string Паспорт { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Клиенты> Клиенты { get; set; }
+        public virtual ICollection<Дополнительное_обслуживание> Дополнительное_обслуживание { get; set; }
     }
 }

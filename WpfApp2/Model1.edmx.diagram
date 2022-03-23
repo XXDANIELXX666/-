@@ -4,22 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c3e7a17975ec4c39a0c973f92d479791" Name="Diagram1">
-        <EntityTypeShape EntityType="HOTELSModel.Gender" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HOTELSModel.NOMERKATEGORIA" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HOTELSModel.Tag" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HOTELSModel.TagOfClient" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HOTELSModel.Виды_обслуживания" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HOTELSModel.Дополнительное_обслуживание" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HOTELSModel.Клиенты" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HOTELSModel.Номера" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HOTELSModel.Сводная_таблица" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+      <Diagram DiagramId="3085209da386466ea3e7f671c2805695" Name="Diagram1">
+        <EntityTypeShape EntityType="HOTELSModel.Gender" Width="1.5" PointX="1.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.NOMERKATEGORIA" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Tag" Width="1.5" PointX="3.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.TagOfClient" Width="1.5" PointX="6" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Дополнительное_обслуживание" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Клиенты" Width="1.5" PointX="3.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Номера" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Работники" Width="1.5" PointX="1.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="HOTELSModel.Сводная_таблица" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
         <AssociationConnector Association="HOTELSModel.FK_Клиенты_Gender" ManuallyRouted="false" />
         <AssociationConnector Association="HOTELSModel.FK_NOMERKATEGORIA_Номера" ManuallyRouted="false" />
         <AssociationConnector Association="HOTELSModel.FK_TagOfClient_Tag" ManuallyRouted="false" />
         <AssociationConnector Association="HOTELSModel.FK_TagOfClient_Клиенты" ManuallyRouted="false" />
-        <AssociationConnector Association="HOTELSModel.FK_Дополнительное_обслуживание_Виды_обслуживания" ManuallyRouted="false" />
-        <AssociationConnector Association="HOTELSModel.FK_Дополнительное_обслуживание_Клиенты" ManuallyRouted="false" />
+        <AssociationConnector Association="HOTELSModel.FK_Дополнительное_обслуживание_Работники" ManuallyRouted="false" />
+        <AssociationConnector Association="HOTELSModel.FK_Сводная_таблица_Дополнительное_обслуживание" ManuallyRouted="false" />
         <AssociationConnector Association="HOTELSModel.FK_Сводная_таблица_Клиенты1" ManuallyRouted="false" />
         <AssociationConnector Association="HOTELSModel.FK_Сводная_таблица_Номера" ManuallyRouted="false" />
       </Diagram>

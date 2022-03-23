@@ -19,13 +19,14 @@ namespace WpfApp2
     /// </summary>
     public partial class AddDataTable : Window
     {
-        HOTELSEntities4 context;
-        public AddDataTable(HOTELSEntities4 context, Сводная_таблица newСводная_таблица)
+        HOTELSEntities10 context;
+        public AddDataTable(HOTELSEntities10 context, Сводная_таблица newСводная_таблица)
         {
             InitializeComponent();
             this.context = context;
             Cmb.ItemsSource = context.Номера.ToList();
             Cmbb.ItemsSource= context.Клиенты.ToList();
+            Cmbbbbb.ItemsSource = context.Дополнительное_обслуживание.ToList();
             this.DataContext = newСводная_таблица;
         }
 

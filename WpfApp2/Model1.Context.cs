@@ -13,10 +13,10 @@ namespace WpfApp2
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HOTELSEntities4 : DbContext
+    public partial class HOTELSEntities10 : DbContext
     {
-        public HOTELSEntities4()
-            : base("name=HOTELSEntities4")
+        public HOTELSEntities10()
+            : base("name=HOTELSEntities10")
         {
         }
     
@@ -29,10 +29,10 @@ namespace WpfApp2
         public virtual DbSet<NOMERKATEGORIA> NOMERKATEGORIA { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
         public virtual DbSet<TagOfClient> TagOfClient { get; set; }
-        public virtual DbSet<Виды_обслуживания> Виды_обслуживания { get; set; }
         public virtual DbSet<Дополнительное_обслуживание> Дополнительное_обслуживание { get; set; }
         public virtual DbSet<Клиенты> Клиенты { get; set; }
         public virtual DbSet<Номера> Номера { get; set; }
+        public virtual DbSet<Работники> Работники { get; set; }
         public virtual DbSet<Сводная_таблица> Сводная_таблица { get; set; }
     }
 }

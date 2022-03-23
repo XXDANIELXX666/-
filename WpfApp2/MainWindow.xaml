@@ -6,27 +6,37 @@
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="0,74,0,64">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
 
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="AddData" Content="Добавить" Click="AddData_Click"></Button>
-            <Button x:Name="DataDelete" Content="Удалить" Click="DataDelete_Click"/>
-        </StackPanel>
 
 
-        <DataGrid Grid.Row="1" x:Name="DataGridСводнаятаблица" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <DataGrid x:Name="DataGridСводнаятаблица" ColumnWidth="*" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Margin="0,30,0,24" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Binding="{Binding Номера.Категории}"/>
                 <DataGridTextColumn Header="Клиент" Binding="{Binding Клиенты.Фамилия}"/>
                 <DataGridTextColumn Header="Дата засиления" Binding="{Binding Дата_засиления}"/>
                 <DataGridTextColumn Header="Дата высиления" Binding="{Binding Дата_высиления}"/>
-                <DataGridTextColumn Header="Изображение" Binding="{Binding ФОТО}"/>
                 <DataGridTextColumn Header="Комментарий" Binding="{Binding Комиентарий}"/>
+                <DataGridTextColumn Header="Обслуживание" Binding="{Binding Дополнительное_обслуживание.Услуга}"/>
                 <DataGridTemplateColumn Header="Редактировать">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -36,6 +46,11 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,-62">
+            <Button x:Name="BtnAddClient" Click="BtnAddClient_Click"  Style="{StaticResource MenuButton}" Margin="240,210,0,0" Height="49" Width="167">Добавить Запись</Button>
+            <Button x:Name="BtnDeleteClientS" Click="BtnDeleteClientS_Click"  Style="{StaticResource MenuButton}" Margin="30,210,0,0">Удалить</Button>
+            <Button x:Name="BtnClients" Click="BtnClients_Click"  Style="{StaticResource MenuButton}" Margin="-950,210,0,0" Width="190">Записать Клиента</Button>
+        </StackPanel>
 
     </Grid>
 </Window>

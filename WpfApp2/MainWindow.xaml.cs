@@ -20,17 +20,28 @@ namespace WpfApp2
     /// </summary>
     public partial class MainWindow : Window
     {
-        HOTELSEntities4 context;
+        HOTELSEntities10 context;
+        string currentLetter = "";
         public MainWindow()
         {
             InitializeComponent();
-            context = new HOTELSEntities4();
+            context = new HOTELSEntities10();
             ShowTable();
+
+            ShowLetters();
+        }
+
+        private void ShowLetters()
+        {
+            
+            
         }
 
         private void ShowTable()
         {
+
             DataGridСводнаятаблица.ItemsSource = context.Сводная_таблица.ToList();
+
         }
 
         private void AddData_Click(object sender, RoutedEventArgs e)
@@ -65,6 +76,42 @@ namespace WpfApp2
             var currentRental = BtnEdit.DataContext as Сводная_таблица;
             var EdiWindow = new AddDataTable(context, currentRental);
             EdiWindow.ShowDialog();
+        }
+
+        private void AddKlient_Click(object sender, RoutedEventArgs e)
+        {
+            var RentalSelect = new Klients();
+            RentalSelect.ShowDialog();
+        }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void TxtEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ShowTable();
+        }
+
+
+
+        private void BtnAddClient_Click(object sender, RoutedEventArgs e)
+        {
+            var NewClientService = new Сводная_таблица();
+            context.Сводная_таблица.Add(NewClientService);
+            var BtnAddData = new AddDataTable(context, NewClientService);
+            BtnAddData.ShowDialog();
+        }
+
+        private void BtnDeleteClientS_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void BtnClients_Click(object sender, RoutedEventArgs e)
+        {
+            var RentalSelect = new Klients();
+            RentalSelect.ShowDialog();
         }
     }
 }
